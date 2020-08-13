@@ -3,11 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <script src="scripts/main.js"></script>
     <title>Tesalon Movie API</title>
 </head>
 <body>
     <h1>Documentation</h1>
     <p>This application will allow users to access information about different movies and genres of their liking. </p>
+<table>
+<tr>
+    <th>Business Logic</th>
+    <th>URL</th>
+    <th>HTTP Method</th>
+    <th>Request Body Format</th>
+    <th>Response Body Format</th>
+</tr>
+
+<tr>
+    <td>Get a list of movies</td>
+    <td>/movies</td>
+    <td>GET</td>
+    <td>None </td>
+    <td>JSON Object will return list of movies.</td>
+</tr>
+
+<tr>
+    <td>Return data on movies</td>
+    <td>/movies/data</td>
+    <td>GET</td>
+    <td>None</td>
+    <td>Return JSON data on description, genre, director,  etc ...</td>
+</tr>
+
+<tr>
+    <td>Allows new users to register</td>
+    <td>/movies/users</td>
+    <td>POST</td>
+    <td>JSON Object holding info about user</td>
+    <td>JSON Object holding info about user that was added</td>
+</tr>
+
+
+<tr>
+    <td>Allows users to update information</td>
+    <td>/movies/users[id]</td>
+    <td>PUT</td>
+    <td>None</td>
+    <td>Message indicating updated information</td>
+</tr>
+
+<tr>
+    <td>Allows users to add a movie to their list of favs</td>
+    <td>/movies/users</td>
+    <td>POST</td>
+    <td>None</td>
+    <td>Returns message about added movies</td>
+</tr>
+
+
+<tr>
+    <td>Allows users to delete movies</td>
+    <td>/movies/users</td>
+    <td>DELETE</td>
+    <td>None</td>
+    <td>Removes movie from fav list</td>
+</tr>
+
+<tr>
+    <td>Allows users to deregister</td>
+    <td>/movies/users</td>
+    <td>DELETE</td>
+    <td>None</td>
+    <td>Message text indicating deregister</td>
+</tr>
+
+
+</table>
+
+
+
 </body>
 </html>

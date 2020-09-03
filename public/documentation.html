@@ -28,12 +28,22 @@
 </tr>
 
 <tr>
-    <td>Return data on movies</td>
-    <td>/movies/data</td>
+    <td>Get a list of Directors</td>
+    <td>/directors</td>
     <td>GET</td>
-    <td>None</td>
-    <td>Return JSON data on description, genre, director,  etc ...</td>
+    <td>None </td>
+    <td>JSON Object will return list of directors.</td>
 </tr>
+
+<tr>
+    <td>Get a list of Genres</td>
+    <td>/movies/genres</td>
+    <td>GET</td>
+    <td>None </td>
+    <td>JSON Object will return list of genres.</td>
+</tr>
+
+
 
 <tr>
     <td>Allows new users to register</td>
@@ -46,7 +56,7 @@
 
 <tr>
     <td>Allows users to update information</td>
-    <td>/movies/users[id]</td>
+    <td>/movies/users/:Username</td>
     <td>PUT</td>
     <td>None</td>
     <td>Message indicating updated information</td>

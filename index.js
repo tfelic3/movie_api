@@ -9,8 +9,11 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, useUnifiedTopology: true }). then(()=>console.log('Connected to database'))
-.catch(err => console.err('Could not connect to MongoDB...'));
+/*mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, useUnifiedTopology: true }). then(()=>console.log('Connected to database'))
+.catch(err => console.err('Could not connect to MongoDB...')); */
+
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true }). then(()=>console.log('Connected to database'))
+.catch(err => console.err('Could not connect to MongoDB...')); 
 
 const app = express();
 

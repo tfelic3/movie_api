@@ -80,7 +80,7 @@ res.json(genre);
 
 
  //Get info about all users
- app.get('/users/', passport.authenticate('jwt', { session: false }), (req, res) => {
+ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -108,7 +108,7 @@ res.json(genre);
    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
    check('Password', 'Password is required').not().isEmpty(),
    check('Email', 'Email does not appear to be valid').isEmail()
- ], passport.authenticate('jwt', { session: false }), (req, res) => {
+ ], (req, res) => {
 
   let errors = validationResult(req);
 

@@ -29,8 +29,8 @@ app.use(cors());
 //CORS implementation
 let allowedOrigins = [
 	'http://localhost:8080',
-	'http://testsite.com',
 	'http://localhost:1234',
+	'https://tessmovieapp.herokuapp.com',
 ];
 
 //Express Validator
@@ -52,15 +52,11 @@ app.get('/documentation', (req, res) => {
 	res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get(
-	'/movies',
-	passport.authenticate('jwt', { session: false }),
-	(req, res) => {
-		Movies.find().then((movies) => {
-			res.json(movies);
-		});
-	}
-);
+app.get('/movies', (req, res) => {
+	Movies.find().then((movies) => {
+		res.json(movies);
+	});
+});
 
 app.get('/directors', (req, res) => {
 	Movies.find({ 'Director.Name': 'Ryan Coogler' }).then((directors) => {

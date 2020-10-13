@@ -1,0 +1,36 @@
+.movie-view {
+  color: white;
+  width: 100%;
+  margin: 5px 5px;
+}
+
+.movie-poster {
+  width: 350px;
+}
+
+button {
+  background-color: yellow;
+}
+.main-view {
+  background-color: black;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 5px 5px;
+}
+
+.card {
+  width: 100%;
+  background-color: gray;
+}
+
+.card-img-top {
+  width: 100%;
+}
+.my-flix {
+  color: steelblue;
+}
+
+/*# sourceMappingURL=/src.78399e21.css.map */

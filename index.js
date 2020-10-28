@@ -110,7 +110,7 @@ app.get(
 
 //Allows new users to register
 app.post(
-	'/users',
+	'/users', 
 	[
 		check('Username', 'Username is required').isLength({ min: 5 }),
 		check(
@@ -119,7 +119,7 @@ app.post(
 		).isAlphanumeric(),
 		check('Password', 'Password is required').not().isEmpty(),
 		check('Email', 'Email does not appear to be valid').isEmail(),
-	],
+	], passport.authenticate('jwt', { session: false }),
 	(req, res) => {
 		let errors = validationResult(req);
 

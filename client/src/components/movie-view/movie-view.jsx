@@ -7,6 +7,9 @@ import './movie-view.scss';
 export class MovieView extends React.Component {
 
 
+	
+
+
 	render() {
 		const { movie} = this.props;
 
@@ -15,16 +18,17 @@ export class MovieView extends React.Component {
 		return (
 
 			
+			
 			<Card style ={{ width: '20rem', margin: "0 auto" }} >
 			
 				<Card.Img variant="top" src={movie.ImagePath} />
 				<Card.Body>
-					<div className>
+					<div>
 					<Card.Title>{movie.Title}</Card.Title>
 					<Card.Text>{movie.Description}</Card.Text>
 
 					
-					<Card.Text>{'Director: '}</Card.Text> <Link to={`/directors/${movie.Director.Name}`}> <Button>{movie.Director.Name}</Button>
+					<Card.Text>{'Director: '}</Card.Text> <Link to={`/director/${movie.Director.Name}`}> <Button>{movie.Director.Name}</Button>
 					</Link>
 
 					<Card.Text>{'Genre: '}</Card.Text> <Link to={`/genres/${movie.Genre.Name}`}>

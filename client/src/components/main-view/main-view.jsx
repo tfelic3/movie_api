@@ -7,6 +7,8 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { GenreView } from '../genre-view/genre-view';
+import { UserView } from '../user-view/user-view';
 import { DirectorView } from '../director-view/director-view';
 import './main-view.scss';
 import { Container, Row, Col, Button } from 'react-bootstrap';
@@ -20,7 +22,7 @@ export class MainView extends React.Component {
 			movies: [],
 			selectedMovie: null,
 			user: null,
-			Director: null,
+			director: null,
 		};
 	}
 
@@ -75,10 +77,11 @@ export class MainView extends React.Component {
 	}
 
 	render() {
-		const { movies, selectedMovie, user, director } = this.state;
+		const { movies, user, director } = this.state;
 
 		if (!user)
 			return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+		
 
 		// Before the movies have been loaded
 		if (!movies) return <div className="main-view" />;
@@ -104,10 +107,12 @@ export class MainView extends React.Component {
 									));
 								}}
 							/>
-							<Route path="/register" render={() => <RegistrationView />} />
+							<Route path="/register" render={() => <RegistrationView 
+			        				
+							/>} />
 
 							<Route
-								path="/directors/:name"
+								path="/director/:name"
 								render={({ match }) => {
 									if (!movies) return <div className="main-view" />;
 									return (
@@ -120,6 +125,33 @@ export class MainView extends React.Component {
 										/>
 									);
 								}}
+							/>
+
+<Route
+								path="/genres/:name"
+								render={({ match }) => {
+							
+									return (
+										<GenreView
+											genre={
+												movies.find(
+													(m) => m.Genre.Name === match.params.name
+												).Genre
+											}
+										/>
+									);
+								}}
+							/>
+
+<Route
+								path="/users"
+								render={() => {
+									return (
+										<UserView
+										user={user.name} />
+									)
+								}
+								}
 							/>
 
 							<Route

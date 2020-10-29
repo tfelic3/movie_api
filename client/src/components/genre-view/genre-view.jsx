@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-export class DirectorView extends React.Component {
+export class GenreView extends React.Component {
 	constructor() {
 		super();
 
@@ -14,22 +14,21 @@ export class DirectorView extends React.Component {
 	}
 
 	render() {
-    const { movie, director } = this.props;
+    const { movie, genre } = this.props;
     
     console.log(movie);
 
-		if (!director) return null;
+		if (!genre) return null;
 
 		return (
-			<div className="director-view">
+			<div className="genre-view">
 				<Container>
 					<Card style={{ width: '25rem' }}>
 						<Card.Body>
 
-							<Card.Title>{director.Name}</Card.Title>
-							<Card.Text>Director Bio: {director.Bio}</Card.Text>
-							<Card.Text>Birth Year: {director.Birth}</Card.Text>
-							<Card.Text>Death Year: {director.Death}</Card.Text>
+							<Card.Title>Genre Name: {genre.Name}</Card.Title>
+                            <Card.Text>Director Bio: {genre.Description}</Card.Text>
+				
 							<Link to={`/`}>
 								<Button variant="link">Back</Button>
 							</Link>

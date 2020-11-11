@@ -1,3 +1,5 @@
+const path = require('path');
+
 const express = require('express'),
 	bodyParser = require('body-parser'),
 	uuid = require('uuid');
@@ -27,11 +29,7 @@ const cors = require('cors');
 app.use(cors());
 
 //CORS implementation
-let allowedOrigins = [
-	'http://localhost:8080',
-	'http://localhost:1234',
-	'https://tessmovieapp.herokuapp.com',
-];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
 //Express Validator
 const { check, validationResult } = require('express-validator');
@@ -48,21 +46,39 @@ require('./passport');
 app.use(morgan('common'));
 app.use(express.static('public'));
 
+app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
+
+app.get('/client/*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
+app.get('/', (req, res) => {
+	res.send('Welcome to myFlix');
+});
+
 app.get('/documentation', (req, res) => {
 	res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get('/movies', (req, res) => {
-	Movies.find().then((movies) => {
-		res.json(movies);
-	});
-});
+app.get(
+	'/movies',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		Movies.find().then((movies) => {
+			res.json(movies);
+		});
+	}
+);
 
-app.get('/directors', (req, res) => {
-	Movies.find({ 'Director.Name': 'Ryan Coogler' }).then((directors) => {
-		res.json(directors);
-	});
-});
+app.get(
+	'/directors',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		Movies.find({ 'Director.Name': 'Ryan Coogler' }).then((directors) => {
+			res.json(directors);
+		});
+	}
+);
 
 app.get(
 	'/movies/genres',
@@ -110,7 +126,7 @@ app.get(
 
 //Allows new users to register
 app.post(
-	'/users', 
+	'/users',
 	[
 		check('Username', 'Username is required').isLength({ min: 5 }),
 		check(
@@ -119,7 +135,7 @@ app.post(
 		).isAlphanumeric(),
 		check('Password', 'Password is required').not().isEmpty(),
 		check('Email', 'Email does not appear to be valid').isEmail(),
-	], passport.authenticate('jwt', { session: false }),
+	],
 	(req, res) => {
 		let errors = validationResult(req);
 

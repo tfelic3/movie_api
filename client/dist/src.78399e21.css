@@ -1,3 +1,12 @@
+.form-label {
+  color: white;
+}
+.form-label {
+  color: white;
+}
+h1, .form-label {
+  color: white;
+}
 body {
   background-color: black;
 }
@@ -8,6 +17,10 @@ body {
 }
 .my-flix {
   color: steelblue;
+}
+
+.button {
+  padding-top: 2em;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */

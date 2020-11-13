@@ -38198,11 +38198,10 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
 
     _this.addNewMovie = function (e) {
+      var favoriteMovies = {};
       e.preventDefault();
 
-      _axios.default.put("https://tessmovieapp.herokuapp.com/users", {
-        FavoriteMovies: FavoriteMovies
-      }).then(function (res) {
+      _axios.default.put("https://tessmovieapp.herokuapp.com/users", {}).then(function (res) {
         _this.setState({
           FavoriteMovies: res.data.FavoriteMovies
         });
@@ -52900,7 +52899,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49429" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56078" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

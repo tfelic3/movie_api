@@ -38197,16 +38197,11 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
 
-    _this.addNewMovie = function (e) {
-      var favoriteMovies = {};
-      e.preventDefault();
+    _this.addNewMovie = function (movieId) {
+      var username = localStorage.getItem('user');
 
-      _axios.default.put("https://tessmovieapp.herokuapp.com/users", {}).then(function (res) {
-        _this.setState({
-          FavoriteMovies: res.data.FavoriteMovies
-        });
-      }).catch(function (e) {
-        console.log(e);
+      _axios.default.post("https://tessmovieapp.herokuapp.com/users/:".concat(username, "/movies/:").concat(movieId)).then(function (movieId) {
+        console.log(movieId);
       });
     };
 
@@ -38248,6 +38243,8 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var movie = this.props.movie;
       var user = this.props.user;
       return _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Img, {
@@ -38255,7 +38252,9 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         src: movie.ImagePath
       }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, null, movie.Description), _react.default.createElement(_Button.default, {
         variant: "outline-dark",
-        onClick: this.addNewMovie
+        onClick: function onClick() {
+          return _this3.addNewMovie(movie._id);
+        }
       }, "Add to Favorites"), _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_Button.default, {
@@ -52725,9 +52724,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/users",
+        path: "/register",
         render: function render() {
           return _react.default.createElement(_registrationView.RegistrationView, null);
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/users/update",
+        render: function render() {
+          return _react.default.createElement(_updateView.UpdateView, null);
         }
       })), _react.default.createElement("div", {
         className: "button"
@@ -52899,7 +52903,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56078" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51841" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

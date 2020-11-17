@@ -138,7 +138,9 @@ class MainView extends React.Component {
 								}}
 							/>
 
-<Route path="/users" render={() => <RegistrationView />} />
+<Route path="/register" render={() => <RegistrationView />} />
+
+<Route path="/users/update" render={() => <UpdateView />} />
 						</Row>
 						<div className="button">
 							<Button onClick={this.onLogOut}>Logout</Button>

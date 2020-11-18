@@ -19,35 +19,16 @@ export class MovieCard extends React.Component {
 	componentDidMount() {
 		//authentication
 		const accessToken = localStorage.getItem('token');
-		this.getUser(accessToken);
+	
 	}
 
-	getUser(token) {
-		const username = localStorage.getItem('user');
-
-		axios
-			.get(`https://tessmovieapp.herokuapp.com/users/${username}`, {
-				headers: { Authorization: `Bearer ${token}` },
-			})
-
-			.then((res) => {
-				this.setState({
-					Username: res.data.Username,
-					FavoriteMovies: res.data.FavoriteMovies,
-				});
-			})
-			.catch(function (err) {
-				console.log(err);
-			});
-	}
-
+	
 	addNewMovie = (movieId) => {
-
 		const username = localStorage.getItem('user');
-
+        const token = localStorage.getItem('token');
 		axios
 			.post(
-				`https://tessmovieapp.herokuapp.com/users/:${username}/movies/:${movieId}`
+				`https://tessmovieapp.herokuapp.com/users/${username}/movies/${movieId}`, {} ,{headers: { Authorization: `Bearer ${token}` }}
 			)
 			.then((movieId) => {
 				console.log(movieId);

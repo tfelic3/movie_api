@@ -38199,8 +38199,13 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
 
     _this.addNewMovie = function (movieId) {
       var username = localStorage.getItem('user');
+      var token = localStorage.getItem('token');
 
-      _axios.default.post("https://tessmovieapp.herokuapp.com/users/:".concat(username, "/movies/:").concat(movieId)).then(function (movieId) {
+      _axios.default.post("https://tessmovieapp.herokuapp.com/users/".concat(username, "/movies/").concat(movieId), {}, {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (movieId) {
         console.log(movieId);
       });
     };
@@ -38218,32 +38223,11 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       //authentication
       var accessToken = localStorage.getItem('token');
-      this.getUser(accessToken);
-    }
-  }, {
-    key: "getUser",
-    value: function getUser(token) {
-      var _this2 = this;
-
-      var username = localStorage.getItem('user');
-
-      _axios.default.get("https://tessmovieapp.herokuapp.com/users/".concat(username), {
-        headers: {
-          Authorization: "Bearer ".concat(token)
-        }
-      }).then(function (res) {
-        _this2.setState({
-          Username: res.data.Username,
-          FavoriteMovies: res.data.FavoriteMovies
-        });
-      }).catch(function (err) {
-        console.log(err);
-      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var movie = this.props.movie;
       var user = this.props.user;
@@ -38253,7 +38237,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
       }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, null, movie.Description), _react.default.createElement(_Button.default, {
         variant: "outline-dark",
         onClick: function onClick() {
-          return _this3.addNewMovie(movie._id);
+          return _this2.addNewMovie(movie._id);
         }
       }, "Add to Favorites"), _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
@@ -52903,7 +52887,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51841" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63494" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

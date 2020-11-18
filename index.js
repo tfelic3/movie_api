@@ -202,24 +202,10 @@ app.put(
 
 //Update movie list
 app.post(
-	'/users/:Username/Movies/:MovieID',
-	[
-		check('Username', 'Username is required').isLength({ min: 5 }),
-		check(
-			'Username',
-			'Username contains non alphanumeric characters - not allowed.'
-		).isAlphanumeric(),
-		check('Password', 'Password is required').not().isEmpty(),
-		check('Email', 'Email does not appear to be valid').isEmail(),
-	],
+	'/users/Username/movies/MovieID',
+
 	passport.authenticate('jwt', { session: false }),
 	(req, res) => {
-		let errors = validationResult(req);
-
-		if (!errors.isEmpty()) {
-			return res.status(422).json({ errors: errors.array() });
-		}
-
 		Users.findOneAndUpdate(
 			{ Username: req.params.Username },
 			{

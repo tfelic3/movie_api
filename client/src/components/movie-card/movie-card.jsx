@@ -19,16 +19,29 @@ export class MovieCard extends React.Component {
 	componentDidMount() {
 		//authentication
 		const accessToken = localStorage.getItem('token');
-	
 	}
 
-	
 	addNewMovie = (movieId) => {
 		const username = localStorage.getItem('user');
-        const token = localStorage.getItem('token');
+		const token = localStorage.getItem('token');
 		axios
 			.post(
-				`https://tessmovieapp.herokuapp.com/users/${username}/movies/${movieId}`, {} ,{headers: { Authorization: `Bearer ${token}` }}
+				`https://tessmovieapp.herokuapp.com/users/${username}/movies/${movieId}`,
+				{},
+				{ headers: { Authorization: `Bearer ${token}` } }
+			)
+			.then((movieId) => {
+				console.log(movieId);
+			});
+	};
+
+	removeMovie = (movieId) => {
+		const username = localStorage.getItem('user');
+		const token = localStorage.getItem('token');
+		axios
+			.delete(
+				`https://tessmovieapp.herokuapp.com/users/${username}/movies/${movieId}`,
+				{ headers: { Authorization: `Bearer ${token}` } }
 			)
 			.then((movieId) => {
 				console.log(movieId);
@@ -46,9 +59,20 @@ export class MovieCard extends React.Component {
 					<Card.Title>{movie.Title}</Card.Title>
 					<Card.Text>{movie.Description}</Card.Text>
 
-					<Button variant="outline-dark" onClick={() => this.addNewMovie(movie._id)}>
+					<Button
+						variant="outline-dark"
+						onClick={() => this.addNewMovie(movie._id)}
+					>
 						Add to Favorites
 					</Button>
+					<br />
+					<Button
+						variant="dark"
+						onClick={() => this.removeMovie(movie._id)}
+					>
+						Remove Favorite
+					</Button>
+					<br />
 					<Link to={`/movies/${movie._id}`}>
 						<Button variant="outline-dark">More Info</Button>
 					</Link>

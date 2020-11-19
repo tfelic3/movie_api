@@ -38210,6 +38210,19 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
       });
     };
 
+    _this.removeMovie = function (movieId) {
+      var username = localStorage.getItem('user');
+      var token = localStorage.getItem('token');
+
+      _axios.default.delete("https://tessmovieapp.herokuapp.com/users/".concat(username, "/movies/").concat(movieId), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (movieId) {
+        console.log(movieId);
+      });
+    };
+
     _this.state = {
       username: null,
       FavoriteMovies: [],
@@ -38239,7 +38252,12 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return _this2.addNewMovie(movie._id);
         }
-      }, "Add to Favorites"), _react.default.createElement(_reactRouterDom.Link, {
+      }, "Add to Favorites"), _react.default.createElement("br", null), _react.default.createElement(_Button.default, {
+        variant: "dark",
+        onClick: function onClick() {
+          return _this2.removeMovie(movie._id);
+        }
+      }, "Remove Favorite"), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_Button.default, {
         variant: "outline-dark"
@@ -52177,9 +52195,7 @@ var _moviesList = _interopRequireDefault(require("../movies-list/movies-list"));
 
 var _reactRouterDom = require("react-router-dom");
 
-var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
-
-var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+var _reactBootstrap = require("react-bootstrap");
 
 var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
 
@@ -52219,10 +52235,10 @@ var UserView = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      username: null,
-      password: null,
-      email: null,
-      birthday: null,
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthday: null,
       favoriteMovies: []
     };
     return _this;
@@ -52252,7 +52268,7 @@ var UserView = /*#__PURE__*/function (_React$Component) {
           Password: res.data.Password,
           Email: res.data.Email,
           Birthday: res.data.Birthday,
-          FavoriteMovies: res.data.FavoriteMovies
+          favoriteMovies: res.data.favoriteMovies
         });
       }).catch(function (err) {
         console.log(err);
@@ -52264,17 +52280,12 @@ var UserView = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var movies = this.props.movies;
-      return _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement("h1", null, "My Profile"), _react.default.createElement("br", null), _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Text, null, "Username: ", this.state.Username), _react.default.createElement(_Card.default.Text, null, "Password: xxxxxx"), _react.default.createElement(_Card.default.Text, null, "Email: ", this.state.Email), _react.default.createElement(_Card.default.Text, null, "Birthday ", this.state.Birthday), _react.default.createElement(_Card.default.Text, null, "Favorite Movies: ", this.state.FavoriteMovies), _react.default.createElement(_reactRouterDom.Link, {
-        to: '/users/update'
-      }, _react.default.createElement(_Button.default, {
-        variant: "primary"
-      }, "Update Profile"), _react.default.createElement("br", null), _react.default.createElement("br", null)), _react.default.createElement(_Button.default, {
-        onClick: function onClick() {
-          return _this3.deleteUser();
-        }
-      }, "Delete User"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/"
-      }, "Back")))));
+      var MovieNames = movies.filter(function (movie) {
+        return _this3.state.favoriteMovies.includes(movie._id);
+      });
+      return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("h1", null, "My Profile"), _react.default.createElement("br", null), _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, " Favorite Movies:", MovieNames.map(function (movie) {
+        return _react.default.createElement(_Card.default.Text, null, movie.title);
+      })))));
     }
   }]);
 
@@ -52282,7 +52293,7 @@ var UserView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.UserView = UserView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js"}],"components/update-view/update-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js"}],"components/update-view/update-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52887,7 +52898,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58781" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59492" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

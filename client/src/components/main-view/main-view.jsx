@@ -134,7 +134,7 @@ class MainView extends React.Component {
 							<Route
 								path="/users"
 								render={() => {
-									return <UserView user={user} />;
+									return <UserView user={user} movies={movies} />;
 								}}
 							/>
 

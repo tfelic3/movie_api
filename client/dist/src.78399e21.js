@@ -52235,10 +52235,10 @@ var UserView = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
+      username: null,
+      password: null,
+      email: null,
+      birthday: null,
       favoriteMovies: []
     };
     return _this;
@@ -52264,11 +52264,11 @@ var UserView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (res) {
         _this2.setState({
-          Username: res.data.Username,
-          Password: res.data.Password,
-          Email: res.data.Email,
-          Birthday: res.data.Birthday,
-          favoriteMovies: res.data.favoriteMovies
+          username: res.data.Username,
+          password: res.data.Password,
+          email: res.data.Email,
+          birthday: res.data.Birthday,
+          favoriteMovies: res.data.FavoriteMovies
         });
       }).catch(function (err) {
         console.log(err);
@@ -52283,9 +52283,19 @@ var UserView = /*#__PURE__*/function (_React$Component) {
       var MovieNames = movies.filter(function (movie) {
         return _this3.state.favoriteMovies.includes(movie._id);
       });
-      return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("h1", null, "My Profile"), _react.default.createElement("br", null), _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, " Favorite Movies:", MovieNames.map(function (movie) {
-        return _react.default.createElement(_Card.default.Text, null, movie.title);
-      })))));
+      return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("h1", null, "My Profile"), _react.default.createElement("br", null), _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Text, null, "Username: ", this.state.username), _react.default.createElement(_Card.default.Text, null, "Email: ", this.state.email), _react.default.createElement(_Card.default.Text, null, "Birthday ", this.state.birthday), "Favorite Movies:", MovieNames.map(function (movie) {
+        return _react.default.createElement(_Card.default.Text, null, movie.Title);
+      }), _react.default.createElement(_reactRouterDom.Link, {
+        to: '/users/update'
+      }, _react.default.createElement(_reactBootstrap.Button, {
+        variant: "primary"
+      }, "Update Profile"), _react.default.createElement("br", null), _react.default.createElement("br", null)), _react.default.createElement(_reactBootstrap.Button, {
+        onClick: function onClick() {
+          return _this3.deleteUser();
+        }
+      }, "Delete User"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/"
+      }, "Back")))));
     }
   }]);
 
@@ -52715,7 +52725,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         path: "/users",
         render: function render() {
           return _react.default.createElement(_userView.UserView, {
-            user: user
+            user: user,
+            movies: movies
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -52898,7 +52909,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59492" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63624" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

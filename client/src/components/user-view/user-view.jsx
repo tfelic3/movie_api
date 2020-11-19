@@ -39,62 +39,55 @@ export class UserView extends React.Component {
 
 			.then((res) => {
 				this.setState({
-					username: res.data.username,
-					password: res.data.password,
-					email: res.data.email,
-					birthday: res.data.birthday,
-					favoriteMovies: res.data.favoriteMovies,
+					username: res.data.Username,
+					password: res.data.Password,
+					email: res.data.Email,
+					birthday: res.data.Birthday,
+					favoriteMovies: res.data.FavoriteMovies,
 				});
 			})
 			.catch(function (err) {
 				console.log(err);
 			});
-  }
-  
-  
-
-
-
-
-
-
+	}
 
 	render() {
-    const { movies } = this.props;
+		const { movies } = this.props;
 
-    const MovieNames = movies.filter( ( movie ) =>
-    this.state.favoriteMovies.includes( movie._id )
-  )
-   
+		const MovieNames = movies.filter((movie) =>
+			this.state.favoriteMovies.includes(movie._id)
+		);
 
 		return (
-
-      <div>
+			<div>
 				<Container>
 					<h1>My Profile</h1>
 					<br />
 					<Card>
-						<Card.Body> Favorite Movies: 
-							
-              {MovieNames.map((movie)=>(
-                <Card.Text>{movie.title}</Card.Text>
-              ))}
-
-        
+						<Card.Body>
+            <Card.Text>Username: {this.state.username}</Card.Text>
+						
+							<Card.Text>Email: {this.state.email}</Card.Text>
+							<Card.Text>Birthday {this.state.birthday}</Card.Text>
+						
+							Favorite Movies:
+							{MovieNames.map((movie) => (
+								
+                <Card.Text>{movie.Title}</Card.Text>
+							))}
+              <Link to={'/users/update'}>
+								<Button variant="primary">Update Profile</Button>
+								<br />
+								<br />
+							</Link>
+							<Button onClick={() => this.deleteUser()}>Delete User</Button>
+							<br />
+							<br />
+							<Link to={`/`}>Back</Link>
 						</Card.Body>
 					</Card>
-
-
-          
-
-          
-          
-
 				</Container>
 			</div>
-    
-
-    )
-    
+		);
 	}
 }
